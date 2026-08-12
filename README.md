@@ -15,13 +15,12 @@
 
 | داشبورد | کیوسک |
 |---|---|
-| ![داشبورد](docs/screenshots/Screenshot (1459).png) | ![کیوسک](docs/screenshots/Screenshot (1462).png) |
+| ![داشبورد](docs/screenshots/Screenshot%20%281459%29.png) | ![کیوسک](docs/screenshots/Screenshot%20%281462%29.png) |
 
 | گزارش‌ها | ثبت چهره |
 |---|---|
-| ![گزارش‌ها](docs/screenshots/Screenshot (1463).png) | ![ثبت چهره](docs/screenshots/Screenshot (1466).png)  |
+| ![گزارش‌ها](docs/screenshots/Screenshot%20%281463%29.png) | ![ثبت چهره](docs/screenshots/Screenshot%20%281466%29.png) |
 
----
 
 ## امکانات
 
