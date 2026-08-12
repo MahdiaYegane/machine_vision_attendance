@@ -10,15 +10,16 @@
 
 ---
 
+
 ## تصاویر
 
 | داشبورد | کیوسک |
 |---|---|
-| ![داشبورد](docs/screenshots/dashboard.png) | ![کیوسک](docs/screenshots/kiosk.png) |
+| ![داشبورد](docs/screenshots/Screenshot (1459).png) | ![کیوسک](docs/screenshots/Screenshot (1462).png) |
 
 | گزارش‌ها | ثبت چهره |
 |---|---|
-| ![گزارش‌ها](docs/screenshots/reports.png) | ![ثبت چهره](docs/screenshots/register.png) |
+| ![گزارش‌ها](docs/screenshots/Screenshot (1463).png) | ![ثبت چهره](docs/screenshots/Screenshot (1466).png)  |
 
 ---
 
