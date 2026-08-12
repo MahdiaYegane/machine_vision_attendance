@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block title %}گزارش‌ها{% endblock %}
+{% block heading %}گزارش‌ها{% endblock %}
+{% block subheading %}حضور و غیاب و مرخصی‌ها{% endblock %}
+
+{% block content %}
+<div class="tabs">
+  <button class="active" data-tab="att">حضور و غیاب</button>
+  <button data-tab="leave">مرخصی‌ها</button>
+</div>
+
+<!-- ===== حضور و غیاب ===== -->
+<section id="tab-att">
+  <div class="card" style="margin-bottom:18px;">
+    <div class="card-body">
+      <div class="filters">
+        <div class="field"><label>از تاریخ</label><input id="f-from" dir="ltr" placeholder="۱۴۰۳-۰۱-۰۱"></div>
+        <div class="field"><label>تا تاریخ</label><input id="f-to" dir="ltr" placeholder="۱۴۰۳-۰۱-۳۱"></div>
+        <div class="field"><label>واحد</label><select id="f-unit"><option value="">همهٔ واحدها</option></select></div>
+        <div class="field"><label>کارمند</label><select id="f-emp"><option value="">همهٔ کارمندان</option></select></div>
+        <button class="btn primary" id="apply-filter">اعمال فیلتر</button>
+        <button class="btn success" id="export-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          خروجی اکسل
+        </button>
+      </div>
+      <p class="help">تاریخ‌ها شمسی و به شکل سال-ماه-روز وارد شوند (مثلاً ۱۴۰۳-۰۵-۰۱). روزهای جمعه به‌عنوان تعطیل در نظر گرفته می‌شوند.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>کد</th><th>نام</th><th>واحد</th><th>روزهای کاری</th><th>حاضر</th><th>غایب</th><th>تأخیر</th><th>اضافه‌کاری (ساعت)</th><th>وضعیت</th><th></th></tr>
+        </thead>
+        <tbody id="rep-body">
+          <tr><td colspan="10" style="text-align:center;color:var(--muted);padding:28px;">در حال بارگذاری…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===== مرخصی‌ها ===== -->
+<section id="tab-leave" style="display:none;">
+  <div class="card" style="margin-bottom:18px;">
+    <div class="card-head"><h2>ثبت مرخصی</h2></div>
+    <div class="card-body">
+      <div class="filters">
+        <div class="field"><label>کارمند</label><select id="lv-emp"><option value="">— انتخاب کنید —</option></select></div>
+        <div class="field"><label>از تاریخ</label><input id="lv-from" dir="ltr" placeholder="۱۴۰۳-۰۵-۰۱"></div>
+        <div class="field"><label>تا تاریخ</label><input id="lv-to" dir="ltr" placeholder="۱۴۰۳-۰۵-۰۳"></div>
+        <div class="field"><label>نوع</label>
+          <select id="lv-type"><option>استحقاقی</option><option>استعلاجی</option><option>بدون حقوق</option><option>ساعتی</option></select>
+        </div>
+        <div class="field" style="min-width:200px;"><label>توضیح</label><input id="lv-note" placeholder="اختیاری"></div>
+        <button class="btn primary" id="lv-add">ثبت مرخصی</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>کد</th><th>نام</th><th>از</th><th>تا</th><th>نوع</th><th>توضیح</th><th></th></tr></thead>
+        <tbody id="lv-body">
+          <tr><td colspan="7" style="text-align:center;color:var(--muted);padding:28px;">در حال بارگذاری…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- مودال جزئیات روزانه -->
+<div class="modal-back" id="detail-modal">
+  <div class="modal wide">
+    <div class="modal-head">
+      <h3 id="detail-title">جزئیات حضور</h3>
+      <button class="x-btn" data-close><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div id="detail-summary" class="muted-text" style="margin-bottom:14px;"></div>
+      <div class="table-wrap" style="max-height:46vh;overflow:auto;">
+        <table>
+          <thead><tr><th>تاریخ</th><th>وضعیت</th><th>ورود</th><th>خروج</th><th>کارکرد (ساعت)</th></tr></thead>
+          <tbody id="detail-body"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn success" id="approve-btn">تأیید گزارش</button>
+      <button class="btn danger" id="reject-btn">رد گزارش</button>
+      <button class="btn" data-close>بستن</button>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/reports.js') }}"></script>
+{% endblock %}

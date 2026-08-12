@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block heading %}داشبورد{% endblock %}
+{% block subheading %}نمای کلی حضور و غیاب امروز{% endblock %}
+
+{% block content %}
+<div class="stat-grid">
+  <div class="stat s-total">
+    <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg></div>
+    <div class="num" id="st-total">—</div><div class="lbl">کل کارمندان</div>
+  </div>
+  <div class="stat s-present">
+    <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+    <div class="num" id="st-present">—</div><div class="lbl">حاضر امروز</div>
+  </div>
+  <div class="stat s-late">
+    <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+    <div class="num" id="st-late">—</div><div class="lbl">تأخیر امروز</div>
+  </div>
+  <div class="stat s-absent">
+    <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></div>
+    <div class="num" id="st-absent">—</div><div class="lbl">غایب امروز</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-head">
+    <h2>آخرین ترددها</h2>
+    <a href="{{ url_for('page_kiosk') }}" class="btn sm primary">باز کردن کیوسک</a>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>کارمند</th><th>کد پرسنلی</th><th>نوع</th><th>ساعت</th></tr></thead>
+      <tbody id="recent-body">
+        <tr><td colspan="4" style="text-align:center;color:var(--muted);padding:28px;">در حال بارگذاری…</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

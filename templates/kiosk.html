@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}کیوسک حضور و غیاب{% endblock %}
+{% block heading %}کیوسک حضور و غیاب{% endblock %}
+{% block subheading %}تشخیص زندهٔ چهره و ثبت ورود/خروج{% endblock %}
+
+{% block content %}
+<div class="kiosk-grid">
+
+  <div class="card">
+    <div class="card-head"><h2>دوربین</h2><span class="muted-text" id="kiosk-state">دوربین خاموش است</span></div>
+    <div class="card-body">
+      <div class="viewfinder" id="kiosk-vf">
+        <video id="kioskVideo" playsinline muted></video>
+        <canvas id="kioskCanvas"></canvas>
+        <div class="reticle"><span class="tl"></span><span class="tr"></span><span class="bl"></span><span class="br"></span></div>
+        <div class="scanline"></div>
+        <div class="vf-flash"></div>
+        <div class="vf-hint" id="kiosk-hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7a2 2 0 0 1 2-2h2l1.5-2h9L18 5h2a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"/><circle cx="12" cy="12" r="3.5"/></svg>
+          برای شروع شناسایی، دوربین را روشن کنید
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:16px;">
+        <button class="btn primary" id="kiosk-start">روشن کردن دوربین</button>
+        <button class="btn ghost" id="kiosk-stop" disabled>خاموش</button>
+      </div>
+      <p class="help">چهرهٔ شما در مرورگر گرفته شده و برای پردازش به سرور پایتون (OpenCV) ارسال می‌شود. کل تشخیص سمت سرور انجام می‌گیرد.</p>
+    </div>
+  </div>
+
+  <div class="result-card result-state idle" id="result">
+    <div class="result-banner">
+      <div class="result-badge" id="result-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M5 21c0-4 3-6 7-6s7 2 7 6"/></svg>
+      </div>
+      <span id="result-status">در انتظار شناسایی</span>
+    </div>
+    <div class="result-meta">
+      <div class="result-name" id="result-name">—</div>
+      <div class="result-sub" id="result-sub">دوربین خاموش است</div>
+      <div class="result-actions">
+        <button class="btn success" id="btn-in" disabled>ثبت ورود</button>
+        <button class="btn primary" id="btn-out" disabled>ثبت خروج</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/kiosk.js') }}"></script>
+{% endblock %}

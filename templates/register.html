@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block heading %}ثبت چهره{% endblock %}
+{% block subheading %}افزودن نمونهٔ چهره برای تشخیص خودکار{% endblock %}
+
+{% block content %}
+<div class="reg-grid">
+  <div class="card">
+    <div class="card-head"><h2>دوربین</h2><span class="muted-text" id="cam-state">دوربین خاموش است</span></div>
+    <div class="card-body">
+      <div class="viewfinder" id="reg-vf" style="aspect-ratio:4/3;">
+        <video id="reg-video" playsinline muted></video>
+        <canvas id="reg-canvas"></canvas>
+        <div class="reticle"><span class="tl"></span><span class="tr"></span><span class="bl"></span><span class="br"></span></div>
+        <div class="scanline"></div>
+        <div class="vf-flash"></div>
+        <div class="vf-hint" id="reg-hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7a2 2 0 0 1 2-2h2l1.5-2h9L18 5h2a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"/><circle cx="12" cy="12" r="3.5"/></svg>
+          برای ثبت چهره، دوربین را روشن کنید
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:16px;">
+        <button class="btn primary" id="cam-start">روشن کردن دوربین</button>
+        <button class="btn success" id="capture" disabled>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7a2 2 0 0 1 2-2h2l1.5-2h9L18 5h2a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"/><circle cx="12" cy="12" r="3.5"/></svg>
+          گرفتن نمونه
+        </button>
+        <button class="btn ghost" id="cam-stop" disabled>خاموش</button>
+      </div>
+      <p class="help">برای دقت بهتر، چند نمونه از زاویه‌ها و حالت‌های مختلف چهره ثبت کنید (حداکثر ۵ نمونه). فقط تصاویر پردازش و به بردار عددی تبدیل می‌شوند؛ خود عکس ذخیره نمی‌شود.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><h2>کارمند</h2></div>
+    <div class="card-body">
+      <div class="field">
+        <label>انتخاب کارمند</label>
+        <select id="emp-select"><option value="">— انتخاب کنید —</option></select>
+      </div>
+      <div id="sel-info" class="muted-text" style="margin-bottom:8px;">برای ثبت چهره ابتدا یک کارمند را انتخاب کنید.</div>
+      <div>
+        <label style="font-size:12.5px;font-weight:600;">نمونه‌های ثبت‌شده</label>
+        <div class="samples" id="samples"></div>
+      </div>
+      <button class="btn sm danger-ghost block" id="clear-samples" style="margin-top:16px;display:none;">حذف همهٔ نمونه‌های این کارمند</button>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/register.js') }}"></script>
+{% endblock %}

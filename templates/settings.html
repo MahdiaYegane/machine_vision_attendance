@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}تنظیمات{% endblock %}
+{% block heading %}تنظیمات{% endblock %}
+{% block subheading %}قواعد کاری، آستانهٔ تشخیص و مدیریت داده‌ها{% endblock %}
+
+{% block content %}
+<div class="reg-grid">
+
+  <div class="card">
+    <div class="card-head"><h2>قواعد کاری و تشخیص</h2></div>
+    <div class="card-body">
+      <div class="field-row">
+        <div class="field"><label>ساعت شروع کار</label><input id="s-start" dir="ltr" placeholder="08:30"></div>
+        <div class="field"><label>ساعات کاری استاندارد (روزانه)</label><input id="s-hours" type="number" min="1" max="24" step="0.5"></div>
+      </div>
+      <div class="field"><label>نام شرکت</label><input id="s-company" placeholder="نام سازمان"></div>
+      <div class="field">
+        <label>آستانهٔ شباهت چهره <span class="muted-text" style="font-weight:400;">(هرچه بیشتر، سخت‌گیرانه‌تر)</span></label>
+        <div class="range-row">
+          <input id="s-threshold" type="range" min="0.2" max="0.8" step="0.001">
+          <span class="range-val" id="s-threshold-val">۰٫۳۶</span>
+        </div>
+        <p class="help">مقدار پیشنهادی برای مدل SFace حدود ۰٫۳۶ است. این مقدار، حداقل شباهت لازم برای تأیید یک چهره را تعیین می‌کند.</p>
+      </div>
+      <button class="btn primary" id="save-settings" style="margin-top:6px;">ذخیرهٔ تنظیمات</button>
+    </div>
+  </div>
+
+  <div>
+    <div class="card" style="margin-bottom:18px;">
+      <div class="card-head"><h2>وضعیت سامانه</h2></div>
+      <div class="card-body">
+        <div class="kv"><span>موتور تشخیص چهره</span><b id="i-engine">—</b></div>
+        <div class="kv"><span>تعداد کارمندان</span><b id="i-emps">—</b></div>
+        <div class="kv"><span>چهره‌های ثبت‌شده</span><b id="i-faces">—</b></div>
+        <div class="kv"><span>پردازش تصویر</span><b>پایتون · OpenCV (YuNet + SFace)</b></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><h2>مدیریت داده‌ها</h2></div>
+      <div class="card-body">
+        <div class="data-actions">
+          <button class="btn" id="seed-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20"/></svg>
+            دادهٔ نمونه
+          </button>
+          <button class="btn" id="backup-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            پشتیبان‌گیری
+          </button>
+          <button class="btn" id="restore-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            بازگردانی
+          </button>
+          <button class="btn danger-ghost" id="reset-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+            پاک‌سازی همه
+          </button>
+        </div>
+        <input type="file" id="restore-file" accept="application/json,.json" style="display:none;">
+        <p class="help">«دادهٔ نمونه» چند کارمند و تردد آزمایشی می‌سازد (بدون چهرهٔ ثبت‌شده). «بازگردانی» داده‌ها را از فایل پشتیبان JSON جایگزین می‌کند.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/settings.js') }}"></script>
+{% endblock %}
